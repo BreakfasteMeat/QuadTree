@@ -113,10 +113,13 @@ public class HelloController {
     private void movePoints() {
         double maxDelta = 2.0;
         for (GameObject point : gameObjects) {
-            double dx = (Math.random() * 2 - 1) * maxDelta;
-            double dy = (Math.random() * 2 - 1) * maxDelta;
-            point.x += dx;
-            point.y += dy;
+            point.move();
+            if(point.x >= quadTree.bounds.w || point.x <= 0) {
+                point.invert_x_velocity();
+            }
+            if(point.y >= quadTree.bounds.h || point.y <= 0) {
+                point.invert_y_velocity();
+            }
         }
     }
 
@@ -141,16 +144,16 @@ public class HelloController {
             RangeCircle circle = new RangeCircle(obj.x, obj.y, obj.radius + 1);
             List<GameObject> collision = quadTree.query(circle);
             for (GameObject gameObject : collision) {
-                if (obj != gameObject) gameObject.collidingWith(gameObject);
+                if (obj != gameObject) obj.collidingWith(gameObject);
             }
         }
     }
 
     public void onAddPoint(ActionEvent actionEvent) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             double x = Math.random() * quadTree.bounds.w;
             double y = Math.random() * quadTree.bounds.h;
-            GameObject object = new GameObject(x, y, Math.random() * 3);
+            GameObject object = new GameObject(x, y, Math.random() * 4 - 2, Math.random() * 4 - 2,Math.random() * 7 + 5);
             gameObjects.add(object);
         }
     }
