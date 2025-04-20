@@ -111,7 +111,6 @@ public class HelloController {
     }
 
     private void movePoints() {
-        double maxDelta = 2.0;
         for (GameObject point : gameObjects) {
             point.move();
             if(point.x >= quadTree.bounds.w || point.x <= 0) {
@@ -150,10 +149,10 @@ public class HelloController {
     }
 
     public void onAddPoint(ActionEvent actionEvent) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 100; i++) {
             double x = Math.random() * quadTree.bounds.w;
             double y = Math.random() * quadTree.bounds.h;
-            GameObject object = new GameObject(x, y, Math.random() * 4 - 2, Math.random() * 4 - 2,Math.random() * 7 + 5);
+            GameObject object = new GameObject(x, y, Math.random() * 4 - 2, Math.random() * 4 - 2,5);
             gameObjects.add(object);
         }
     }
