@@ -58,6 +58,7 @@ public class HelloController {
                     }
 
                     quadCheckCollisions();
+                    //checkCollisionsYucksVersion();
                     checkInRanges();
                     movePoints();
                     draw();
@@ -80,9 +81,9 @@ public class HelloController {
     private void drawTree(GraphicsContext gc, QuadTree node) {
         if (node == null) return;
 
-        QuadRectangle boundary = node.bounds;
-        gc.setStroke(Color.LIGHTGRAY);
-        gc.strokeRect(boundary.x, boundary.y, boundary.w, boundary.h);
+//        QuadRectangle boundary = node.bounds;
+//        gc.setStroke(Color.LIGHTGRAY);
+//        gc.strokeRect(boundary.x, boundary.y, boundary.w, boundary.h);
 
         for (GameObject obj : node.objects) {
             if (obj.collided) {
@@ -147,12 +148,19 @@ public class HelloController {
             }
         }
     }
+    public void checkCollisionsYucksVersion(){
+        for(GameObject gameObject : gameObjects){
+            for(GameObject o : gameObjects){
+                gameObject.collidingWith(o);
+            }
+        }
+    }
 
     public void onAddPoint(ActionEvent actionEvent) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 5; i++) {
             double x = Math.random() * quadTree.bounds.w;
             double y = Math.random() * quadTree.bounds.h;
-            GameObject object = new GameObject(x, y, Math.random() * 4 - 2, Math.random() * 4 - 2,5);
+            GameObject object = new GameObject(x, y, Math.random() * 4 - 2, Math.random() * 4 - 2,Math.random()*15);
             gameObjects.add(object);
         }
     }

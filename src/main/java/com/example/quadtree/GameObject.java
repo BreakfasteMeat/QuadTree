@@ -35,6 +35,7 @@ public class GameObject implements Collidable<GameObject>{
         other.collided = true;
 
         resolveElasticCollision(other);
+
     }
 
     public void resolveElasticCollision(GameObject other) {
@@ -94,8 +95,6 @@ public class GameObject implements Collidable<GameObject>{
 
         x_velocity -= deltaV.x;
         y_velocity -= deltaV.y;
-        other.x_velocity += deltaV.x;
-        other.y_velocity += deltaV.y;
     }
 
 
